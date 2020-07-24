@@ -1,6 +1,8 @@
 import React from 'react';
+import {Link, Route, Switch} from 'react-router-dom';
 
-const Navbar = ({onToggleSidebar}) => {
+const Navbar = ({headerObj, onToggleSidebar}) => {
+  const { header, handleHeaderChange } = headerObj
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <button className="btn btn-primary" id="menu-toggle" onClick={onToggleSidebar}>Sidebar</button>
@@ -10,7 +12,7 @@ const Navbar = ({onToggleSidebar}) => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <nav className="navbar navbar-light bg-light">
-        <span className="navbar-brand mb-0 h1">Header</span>
+        <span className="navbar-brand mb-0 h1">{header}</span>
       </nav>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
@@ -20,7 +22,7 @@ const Navbar = ({onToggleSidebar}) => {
               Settings
             </a>
             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">Profile</a>
+              <Link to="/profile" className="dropdown-item" onClick={() => handleHeaderChange('Profile')}>Profile</Link>
               <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="#">Logout</a>
             </div>
