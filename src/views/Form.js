@@ -13,10 +13,10 @@ const Form = () =>  {
       </Link>
       <Switch>
         <Route path={`${path}/create`}>
-          <FormCreate />
+          <FormCreate url={url}  />
         </Route>
         <Route path={`${path}/search`}>
-          <FormSearch url={url} />
+          <FormSearch />
         </Route>
         <Redirect from={path} to={`${path}/search`} />
       </Switch>
