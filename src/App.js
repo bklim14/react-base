@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import DefaultLayout from "./layouts/DefaultLayout";
-import Dashboard from "./views/Dashboard";
-import Form from "./views/Form";
-import Profile from "./views/Profile";
+import MenuService from "./services/menuService";
 
 const NoMatch = () => {
   return <div> ERROR 404 </div>;
 }
 
-const routes = [
-  { path: '/home', name: 'Dashboard', component: Dashboard, link: true },
-  { path: '/form', name: 'Form', component: Form, link: true},
-  { path: '/profile', name: 'Profile', component: Profile, link: false},
-]
-
 const App = () => {
+  const menuService = new MenuService();
   const [header, setHeader] = useState('Dashboard');
+  const [routes, setRoutes] = useState([]);
   const handleHeaderChange = h => setHeader(h);
-  const headerObj = {header, handleHeaderChange}
+  const headerObj = {header, handleHeaderChange};
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const routes = await menuService.getMenu();
+      setRoutes(routes);
+    }
+    fetchData();
+  },[]);
+
   return (
     <Router>
       <Switch>

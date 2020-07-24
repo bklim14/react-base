@@ -7,10 +7,9 @@ import Content from "../components/Content";
 const DefaultLayout = ({headerObj, routes}) => {
   const toggleSidebar = () => document.getElementById('wrapper')
     .classList.toggle('toggled');
-  const { header, handleHeaderChange } = headerObj
   return (
     <div className="d-flex" id="wrapper">
-      <Sidebar routes={routes} handleHeaderChange={handleHeaderChange}/>
+      <Sidebar routes={routes} handleHeaderChange={headerObj.handleHeaderChange}/>
       <div id="view-wrapper">
         <Navbar headerObj={headerObj} onToggleSidebar={toggleSidebar}/>
         <Content routes={routes} />

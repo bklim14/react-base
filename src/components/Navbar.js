@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Navbar = ({headerObj, onToggleSidebar}) => {
   const { header, handleHeaderChange } = headerObj
