@@ -3,17 +3,18 @@ import React from 'react';
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Content from "../components/Content";
+import {ModuleProvider} from "../state/moduleContext";
 
-const DefaultLayout = ({headerObj, routes}) => {
-  const toggleSidebar = () => document.getElementById('wrapper')
-    .classList.toggle('toggled');
+const DefaultLayout = () => {
   return (
     <div className="d-flex" id="wrapper">
-      <Sidebar routes={routes} handleHeaderChange={headerObj.handleHeaderChange}/>
-      <div id="view-wrapper">
-        <Navbar headerObj={headerObj} onToggleSidebar={toggleSidebar}/>
-        <Content routes={routes} />
-      </div>
+      <ModuleProvider>
+        <Sidebar />
+        <div id="view-wrapper">
+          <Navbar />
+          <Content />
+        </div>
+      </ModuleProvider>
     </div>
   );
 }

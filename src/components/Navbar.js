@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from 'react-router-dom';
+import {ModuleContext, ModuleDispatchContext} from "../state/moduleContext";
 
-const Navbar = ({headerObj, onToggleSidebar}) => {
-  const { header, handleHeaderChange } = headerObj
+const Navbar = () => {
+  const { header } = useContext(ModuleContext)
+  const { setHeader } = useContext(ModuleDispatchContext)
+
+  const toggleSidebar = () => document.getElementById('wrapper')
+    .classList.toggle('toggled');
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <button className="btn btn-primary" id="menu-toggle" onClick={onToggleSidebar}>Sidebar</button>
+      <button className="btn btn-primary" id="menu-toggle" onClick={toggleSidebar}>Sidebar</button>
 
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +28,7 @@ const Navbar = ({headerObj, onToggleSidebar}) => {
               Settings
             </a>
             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <Link to="/profile" className="dropdown-item" onClick={() => handleHeaderChange('Profile')}>Profile</Link>
+              <Link to="/profile" className="dropdown-item" onClick={() => setHeader('Profile')}>Profile</Link>
               <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="#">Logout</a>
             </div>

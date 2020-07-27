@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import {ModuleContext} from "../state/moduleContext";
 
-const Content = ({routes}) => {
+const Content = () => {
+  const { routes } = useContext(ModuleContext)
   return (
     <div className="container">
       <Switch>
