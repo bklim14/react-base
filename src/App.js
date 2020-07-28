@@ -1,24 +1,37 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom';
+import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
 import './App.css';
 import DefaultLayout from "./layouts/DefaultLayout";
+import config from "./authConfig";
+import Login from "./components/Login";
+import {UserProvider} from "./state/userContext";
 
-const NoMatch = () => {
-  return <div> ERROR 404 </div>;
-}
+const HasAccessToRouter = () => {
 
-const App = () => {
+  const history = useHistory();
+
+  const customAuthHandler = () => {
+    history.push("/login");
+  }
 
   return (
-    <Router>
+    <Security {...config.oidc} onAuthRequired={customAuthHandler}>
       <Switch>
-        <Route path="/" render={() => <DefaultLayout />}></Route>
-        <Route path="*">
-          <NoMatch />
-        </Route>
+        <Route path="/login" component={Login} />
+        <Route path="/callback" component={LoginCallback} />
+        <UserProvider>
+          <SecureRoute path="/" component={DefaultLayout}/>
+        </UserProvider>
       </Switch>
-    </Router>
+    </Security>
   );
 }
+
+const App = () => (
+  <Router>
+    <HasAccessToRouter />
+  </Router>
+)
 
 export default App;

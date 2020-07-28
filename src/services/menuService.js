@@ -8,7 +8,7 @@ class MenuService extends Service {
     return [
       { path: '/home', name: 'Dashboard', component: Dashboard, link: true },
       { path: '/form', name: 'Form', component: Form, link: true},
-      { path: '/profile', name: 'Profile', component: Profile, link: false},
+      { path: '/profile', name: 'Profile', component: Profile, link: true},
     ]
   }
 }

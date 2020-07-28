@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import {ModuleContext} from "../state/moduleContext";
+import { Switch, Route } from 'react-router-dom';
+import {UserContext} from "../state/userContext";
 
 const Content = () => {
-  const { routes } = useContext(ModuleContext)
+  const { routes } = useContext(UserContext)
   return (
     <div className="container">
       <Switch>
@@ -13,14 +13,13 @@ const Content = () => {
               key={i}
               path={route.path}
               name={route.name}
-              render={ () => <route.component />}
+              component={route.component}
             />
           )
         })}
-        <Redirect from="/" to="/home" />
       </Switch>
     </div>
-  )
+  );
 }
 
 export default Content;

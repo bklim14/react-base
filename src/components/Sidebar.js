@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import {ModuleContext, ModuleDispatchContext} from "../state/moduleContext";
+import {UserContext, UserDispatchContext} from "../state/userContext";
 import MenuService from "../services/menuService";
 
 const Sidebar = () => {
   const menuService = new MenuService();
-  const { routes } = useContext(ModuleContext)
-  const { setHeader, setRoutes } = useContext(ModuleDispatchContext)
+  const { routes } = useContext(UserContext)
+  const { setRoutes } = useContext(UserDispatchContext)
   console.log('here')
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +27,6 @@ const Sidebar = () => {
               key={i}
               to={route.path}
               className="list-group-item list-group-item-action bg-light"
-              onClick={()=>setHeader(route.name)}
             >{route.name}</Link>
           )
         })}
@@ -36,4 +35,4 @@ const Sidebar = () => {
   );
 }
 
-export default  Sidebar;
+export default  React.memo(Sidebar);
