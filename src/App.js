@@ -29,7 +29,7 @@ const HasAccessToRouter = () => {
 }
 
 const App = () => (
-  <Router>
+  <Router basename="/react-base">
     <HasAccessToRouter />
   </Router>
 )

@@ -7,7 +7,7 @@ const Navbar = () => {
   const { user } = useContext(UserContext);
 
   const logout = () => {
-    authService.logout('/');
+    authService.logout('/react-base');
   };
 
   const toggleSidebar = () => document.getElementById('wrapper')
@@ -29,7 +29,7 @@ const Navbar = () => {
               Hi {user.given_name}!
             </a>
             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#" onClick={logout}>Logout</a>
+              <button className="dropdown-item" onClick={logout}>Logout</button>
             </div>
           </li>
         </ul>
