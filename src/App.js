@@ -15,8 +15,13 @@ const HasAccessToRouter = () => {
     history.push("/login");
   }
 
+  const oidc = (process.env.NODE_ENV !== 'production')
+    ? config.dev.oidc : config.prod.oidc
+
   return (
-    <Security {...config.oidc} onAuthRequired={customAuthHandler}>
+    <Security
+      {...oidc}
+      onAuthRequired={customAuthHandler}>
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/callback" component={LoginCallback} />

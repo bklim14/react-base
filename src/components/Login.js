@@ -6,7 +6,9 @@ import config from "../authConfig";
 
 const Login = () => {
   useEffect(() => {
-    const { pkce, issuer, clientId, redirectUri, scopes } = config.oidc;
+    const oidc = (process.env.NODE_ENV !== 'production')
+      ? config.dev.oidc : config.prod.oidc
+    const { pkce, issuer, clientId, redirectUri, scopes } = oidc;
     const widget = new OktaSignIn({
       /**
        * Note: when using the Sign-In Widget for an OIDC flow, it still

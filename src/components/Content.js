@@ -17,7 +17,9 @@ const Content = () => {
             />
           )
         })}
-        <Redirect from="/" to="/home" />
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
       </Switch>
     </div>
   );
